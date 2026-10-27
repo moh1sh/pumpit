@@ -144,7 +144,7 @@ button{font:inherit;color:inherit}
 html{scroll-behavior:auto}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 .wrap{width:100%;max-width:1200px;margin-inline:auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
-.top{height:64px;display:flex;align-items:center}
+.top{height:64px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:var(--t-md);letter-spacing:-0.03em}
 .brand img{width:28px;height:28px;border-radius:22%;display:block}
 
@@ -157,6 +157,7 @@ html{scroll-behavior:auto}
 .btn.primary:hover{background:#33865D;transform:translateY(-1px)}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--btn-line)}
 .btn.ghost:hover{background:var(--hover-lab);transform:translateY(-1px)}
+.btn.sm{height:40px;padding:0 18px;font-size:var(--t-sm)}
 .btn:active{transform:scale(.98)}
 .btn:focus-visible{outline-offset:3px}
 
@@ -210,7 +211,7 @@ html{scroll-behavior:auto}
 <body>
 
 
-<header class="wrap top"><div class="brand"><img data-logo="uni" alt="">Unifold</div></header>
+<header class="wrap top"><div class="brand"><img data-logo="uni" alt="">Unifold</div><a class="btn ghost sm" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a></header>
 
 <main>
 <section class="wrap hero">
@@ -219,7 +220,7 @@ html{scroll-behavior:auto}
     <p style="--i:1">A full Fomo-like onramp inside your mobile app, with the best approval rates across the US and EU.</p>
     <div class="cta" style="--i:2">
       <a class="btn primary" href="#compare">See the comparison</a>
-      <button class="btn ghost" id="watch" type="button">Watch the flow</button>
+      <a class="btn ghost" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a>
     </div>
   </div>
   <div class="stage">
@@ -390,9 +391,6 @@ html{scroll-behavior:auto}
   });
 
   [].forEach.call(document.querySelectorAll("[data-logo]"),function(im){im.src=LOGO[im.getAttribute("data-logo")]});
-  document.getElementById("watch").addEventListener("click",function(){
-    open(ROWS.map(function(r){return r.id}).indexOf("headless"),this);
-  });
 
   var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var vid=document.getElementById("heroVid"),phone=document.getElementById("phone");
