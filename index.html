@@ -310,7 +310,7 @@ html{scroll-behavior:auto}
   function no(s){return NO+(s?'<span class="small">'+s+'</span>':'<span class="sr">No</span>')}
   var ROWS=[
     {id:"providers",label:"Ramp providers",f:val("1","Swapped"),u:val("3+","Coinbase, Stripe, Swapped, etc"),title:"Ramp providers",fc:"Swapped only",uc:"Coinbase, Stripe, Swapped, etc"},
-    {id:"lowkyc",label:"Low or no KYC",f:no("Redirects to Swapped widget"),u:yes("Stripe, Coinbase"),title:"Low or no KYC",fc:"Swapped doesn't offer low or no KYC. Often a redirect to the Swapped widget",uc:"Stripe US/EU, Coinbase US"},
+    {id:"lowkyc",nomedia:true,label:"Low or no KYC",f:no("Redirects to Swapped widget"),u:yes("Stripe, Coinbase"),title:"Low or no KYC",fc:"Swapped doesn't offer low or no KYC. Often a redirect to the Swapped widget",uc:"Stripe US/EU, Coinbase US"},
     {id:"approval",nomedia:true,label:"Approval rates",f:val("Low","Credit card approvals"),u:val("High","Credit card approvals"),title:"Approval rates",fc:"Low credit card approval rates. Swapped has no MiCA license and uses a different provider for MiCA",uc:"High credit card approval rates. Stripe has the highest approval rates"},
     {id:"headless",label:"Apple Pay",f:no("Not headless"),u:val("Headless","Via Coinbase, same experience as Fomo"),title:"Apple Pay",fc:"Not headless",uc:"Headless via Coinbase, same experience as Fomo"},
     {id:"sdk",nomedia:true,label:"SDK support",f:'<span class="small lang">Not confirmed</span>',u:YES+'<span class="small lang">React, React Native, Swift, Kotlin, Flutter, Svelte</span>',title:"SDK support",fc:"Not confirmed",uc:"React, React Native, Swift, Kotlin, Flutter and Svelte"},
