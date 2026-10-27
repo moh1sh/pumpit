@@ -118,12 +118,10 @@ button{font:inherit;color:inherit}
 .pane.u{color:var(--u-ink)}
 .pane h3{margin:0;font-weight:800;font-size:var(--t-lg);line-height:1;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px}
 .pane h3 img{width:32px;height:32px;border-radius:22%}
-.frame{position:relative;min-height:0;border:2px dashed;border-radius:16px;display:grid;place-items:center;overflow:hidden;cursor:pointer;font-size:var(--t-sm);text-align:center;padding:12px}
+.frame{position:relative;min-height:0;border:2px dashed;border-radius:16px;display:grid;place-items:center;overflow:hidden;cursor:default;font-size:var(--t-sm);text-align:center;padding:12px}
 .pane.f .frame{border-color:#6B736E;background:#2F3331;color:var(--f-mute)}
 .pane.u .frame{border-color:#8CCBA8;background:#256A47;color:var(--u-mute)}
-.frame:hover{border-color:var(--u-yes)}
 .frame img,.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.frame input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
 .frame.stack{display:grid;grid-auto-rows:minmax(0,1fr);gap:10px;place-items:stretch;padding:10px;cursor:default;border-style:solid}
 .frame.stack img{position:static;height:100%;min-height:0;width:100%;object-fit:contain;border-radius:10px;background:#15181F}
 .frame.none{border-style:solid;cursor:default;font-weight:600;font-size:var(--t-lg)}
@@ -335,31 +333,23 @@ html{scroll-behavior:auto}
   });
 
   var veil=document.getElementById("veil"),pair=document.getElementById("pair"),vt=document.getElementById("vt");
-  var cur=0,opener=null,previews={};
+  var cur=0,opener=null;
   function pane(side,r){
-    var name=side==="fun"?"Fun.xyz":"Unifold", key=r.id+"-"+side;
+    var name=side==="fun"?"Fun.xyz":"Unifold";
     var cap=side==="fun"?r.fc:r.uc;
     var div=document.createElement("div"); div.className="pane "+(side==="fun"?"f":"u");
     var h=document.createElement("h3"); var lg=document.createElement("img"); lg.src=side==="fun"?LOGO.fun:LOGO.uni; lg.alt=""; h.appendChild(lg); h.appendChild(document.createTextNode(name)); div.appendChild(h);
-    var frame=document.createElement("label"); frame.className="frame";
+    var frame=document.createElement("div"); frame.className="frame";
     var c=document.createElement("div"); c.className="cap"; c.textContent=cap;
     if(side==="fun"&&r.nofun){frame.className="frame none";frame.textContent="Not offered";div.appendChild(frame);div.appendChild(c);return div;}
-    var src=previews[key]||(MEDIA[r.id]&&MEDIA[r.id][side]);
+    var src=MEDIA[r.id]&&MEDIA[r.id][side];
     if(src&&src.multi){
       frame.className="frame stack";
       src.multi.forEach(function(m){var im=document.createElement("img");im.src=m.url;im.alt=m.alt;frame.appendChild(im);});
       div.appendChild(frame);div.appendChild(c);return div;
     }
     if(src){media(frame,src.url,src.type);}
-    else{var sp=document.createElement("span"); sp.textContent="Add a GIF, image or video"; frame.appendChild(sp);}
-    var inp=document.createElement("input"); inp.type="file"; inp.accept="image/*,video/*";
-    inp.setAttribute("aria-label",name+" recording for "+r.label);
-    inp.addEventListener("change",function(){
-      var f=inp.files&&inp.files[0]; if(!f)return;
-      previews[key]={url:URL.createObjectURL(f),type:f.type.indexOf("video")===0?"video":"image"};
-      render(cur);
-    });
-    frame.appendChild(inp);
+    else{var sp=document.createElement("span"); sp.textContent="Coming soon"; frame.appendChild(sp);}
     div.appendChild(frame);div.appendChild(c);
     return div;
   }
