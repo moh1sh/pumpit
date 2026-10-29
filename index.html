@@ -145,6 +145,8 @@ html{scroll-behavior:auto}
 .top{height:64px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:var(--t-md);letter-spacing:-0.03em}
 .brand img{width:28px;height:28px;border-radius:22%;display:block}
+.top-actions{display:flex;align-items:center;gap:10px}
+@media (max-width:480px){.top-actions .btn{padding:0 12px}}
 
 .hero{min-height:calc(100dvh - 64px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:24px 56px}
 .hero h1{margin:0;font-size:var(--t-display);line-height:1.02;letter-spacing:-0.045em;font-weight:700;text-wrap:balance}
@@ -209,7 +211,7 @@ html{scroll-behavior:auto}
 <body>
 
 
-<header class="wrap top"><div class="brand"><img data-logo="uni" alt="">Unifold</div><a class="btn ghost sm" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a></header>
+<header class="wrap top"><div class="brand"><img data-logo="uni" alt="">Unifold</div><div class="top-actions"><a class="btn ghost sm" href="unifold.html">Why Unifold</a><a class="btn ghost sm" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a></div></header>
 
 <main>
 <section class="wrap hero">

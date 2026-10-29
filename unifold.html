@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Unifold deposit infrastructure compared with a single ramp, a single bridge and other deposit platforms.">
+<script>document.documentElement.className+=" js"</script>
+<title>Unifold: better than any other deposit stack</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap">
+<style>
+/* Same system as index.html: white page, Geist, Unifold in green and the alternatives in dark grey, surfaces 20px, controls are pills. */
+:root{
+  --bg:#FFFFFF; --ink:#1E2321; --mute:#6A726D; --line:#E6E9E6;
+  --f-col:#3A3F3D; --f-head:#2F3331; --f-ink:#ECEFEC; --f-mute:#B3BBB6; --f-no:#8B948E;
+  --u-col:#2A744F; --u-head:#1F5E3F; --u-ink:#F4FBF7; --u-mute:#E4F4EA; --u-yes:#F4FBF7;
+  --lab-col:#FFFFFF;
+  --face:'Geist','Helvetica Neue',Arial,sans-serif;
+  --t-xs:13px; --t-sm:14px; --t-md:16px; --t-lg:20px; --t-xl:24px;
+  --t-h2:clamp(28px,3.4vw,40px); --t-display:clamp(38px,5vw,56px);
+  --r-card:20px; --r-in:12px;
+  --mat:#F5F6F5; --mat-line:#E1E5E1; --hover-lab:#F1F3F1; --chip:#EEF1EE; --btn-line:#CBD2CD;
+  --focus:#2A744F; --accent-text:#2A744F; --u-soft:#E6F3EC;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0F1211; --ink:#EEF1EF; --mute:#98A29C; --line:#2A2F2C; --lab-col:#151918;
+    --mat:#161A18; --mat-line:#262C29; --hover-lab:#1D2220; --chip:#232826; --btn-line:#3A413D;
+    --focus:#6FCF9D; --accent-text:#6FCF9D; --u-soft:#1B2B23;
+  }
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:auto}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;font-family:var(--face);font-size:var(--t-md);line-height:1.4;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:100%;max-width:1200px;margin-inline:auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+
+.top{height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:var(--t-md);letter-spacing:-0.03em;text-decoration:none}
+.brand img{width:28px;height:28px;border-radius:22%;display:block}
+.top-actions{display:flex;align-items:center;gap:10px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:999px;border:1px solid transparent;font-family:inherit;font-size:var(--t-md);font-weight:600;letter-spacing:-0.01em;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background .15s,transform .35s var(--ease)}
+.btn.primary{background:var(--u-col);color:var(--u-ink);box-shadow:0 10px 24px -12px rgba(31,94,63,.7)}
+.btn.primary:hover{background:#33865D;transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--btn-line)}
+.btn.ghost:hover{background:var(--hover-lab);transform:translateY(-1px)}
+.btn.white{background:var(--u-yes);color:#1F5E3F}
+.btn.white:hover{transform:translateY(-1px)}
+.btn.sm{height:40px;padding:0 18px;font-size:var(--t-sm)}
+.btn:active{transform:scale(.98)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:24px 56px;min-height:calc(100dvh - 64px)}
+.hero h1{font-size:var(--t-display);line-height:1.02;letter-spacing:-0.045em;font-weight:700;text-wrap:balance}
+.hero p{margin-top:20px;max-width:44ch;font-size:var(--t-lg);line-height:1.45;color:var(--mute);text-wrap:pretty}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+
+/* boards */
+.mat{width:100%;padding:clamp(6px,1.2vw,12px);border-radius:26px;background:var(--mat);border:1px solid var(--mat-line);display:grid;gap:12px}
+.board{border-radius:var(--r-card);overflow:hidden;background:var(--lab-col);border:1px solid var(--mat-line)}
+.cols{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr) minmax(0,1.3fr)}
+.cols>*{min-width:0}
+.hd>div{display:flex;align-items:center;padding:14px clamp(10px,1.6vw,20px);min-height:48px;font-size:var(--t-lg);font-weight:800;letter-spacing:-0.03em}
+.hd .lab{color:var(--mute);font-size:var(--t-sm);font-weight:700;letter-spacing:0}
+.hd .f{background:var(--f-head);color:var(--f-ink);font-weight:700}
+.hd .u{background:var(--u-head);color:var(--u-ink)}
+.vrow .cell{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:12px clamp(10px,1.6vw,20px);border-top:1px solid var(--line);font-size:var(--t-sm);line-height:1.3}
+.vrow .cell.lab{background:var(--lab-col);color:var(--ink);font-weight:700}
+.vrow .cell.u{background:var(--u-col);color:var(--u-ink);border-top-color:rgba(255,255,255,.2);font-weight:600}
+.vrow .cell.f{background:var(--f-col);color:var(--f-ink);border-top-color:rgba(255,255,255,.1)}
+
+/* proof */
+.proof{display:flex;flex-wrap:wrap;align-items:center;gap:12px 32px;padding-block:28px;border-block:1px solid var(--line)}
+.proof span{color:var(--mute);font-size:var(--t-sm);font-weight:600}
+.proof b{font-size:var(--t-xl);font-weight:800;letter-spacing:-0.04em}
+
+section{padding-top:clamp(56px,8vw,104px)}
+h2{font-size:var(--t-h2);line-height:1.05;letter-spacing:-0.04em;font-weight:700;text-wrap:balance}
+.sec-head{display:flex;flex-direction:column;gap:14px;max-width:720px;margin-bottom:28px}
+.sub{font-size:var(--t-lg);line-height:1.45;color:var(--mute);text-wrap:pretty;max-width:52ch}
+
+/* tiles */
+.bento{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:12px}
+.tile{position:relative;overflow:hidden;border-radius:var(--r-card);padding:clamp(22px,3vw,32px)}
+.tile h3{font-size:var(--t-xl);line-height:1.1;letter-spacing:-0.03em;font-weight:700;text-wrap:balance}
+.tile p{margin-top:12px;max-width:40ch;font-size:var(--t-sm);line-height:1.5;text-wrap:pretty}
+.tile.u{grid-row:span 2;display:flex;flex-direction:column;justify-content:flex-end;min-height:300px;background:linear-gradient(160deg,var(--u-col),var(--u-head));color:var(--u-ink)}
+.tile.u h3{font-size:clamp(28px,3.2vw,40px);letter-spacing:-0.04em}
+.tile.u p{color:var(--u-mute);font-size:var(--t-md)}
+.tile.sub{background:var(--mat);border:1px solid var(--mat-line)}
+.tile.sub p{color:var(--mute)}
+
+/* routing demo */
+.route{display:grid;grid-template-columns:1fr 64px 1fr 64px 1.25fr;align-items:center}
+.r-link{height:2px;background:var(--line)}
+.r-bridges{display:grid;gap:10px}
+.node{position:relative;min-height:84px;display:flex;flex-direction:column;justify-content:center;padding:18px 22px;background:var(--lab-col);border:1.5px solid var(--mat-line);border-radius:var(--r-card);font-size:var(--t-lg);font-weight:700;letter-spacing:-0.03em}
+.node small{margin-top:2px;font-size:var(--t-sm);font-weight:500;letter-spacing:0;color:var(--mute)}
+.node.uni{background:var(--u-col);border-color:var(--u-col);color:var(--u-ink)}
+.node.uni small{color:var(--u-mute)}
+.bridge{min-height:68px;font-size:var(--t-md)}
+.bridge em{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-style:normal;font-size:var(--t-sm);font-weight:600;color:var(--mute)}
+.bridge em.t2{opacity:0}
+/* resting state is the finished story: A stalled, B delivered */
+.bridge.a{border-style:dashed;color:var(--mute)}
+.bridge.a .t1{opacity:0}.bridge.a .t2{opacity:1}
+.bridge.b{border-color:var(--u-col);background:var(--u-soft)}
+.bridge.b .t1{opacity:0}.bridge.b .t2{opacity:1;color:var(--accent-text)}
+.js .route:not(.play) .bridge.a{border-style:solid;border-color:var(--u-col);background:var(--u-soft);color:var(--ink)}
+.js .route:not(.play) .bridge.a .t1{opacity:1;color:var(--accent-text)}.js .route:not(.play) .bridge.a .t2{opacity:0}
+.js .route:not(.play) .bridge.b{border-color:var(--mat-line);background:var(--lab-col)}
+.js .route:not(.play) .bridge.b .t1{opacity:1}.js .route:not(.play) .bridge.b .t2{opacity:0}
+.replay{display:none;margin-top:24px}
+.js .replay{display:inline-flex}
+@media (prefers-reduced-motion:no-preference){
+  .route.play .bridge.a{animation:a-box 4s var(--ease) both}
+  .route.play .bridge.a .t1{animation:a-t1 4s linear both}
+  .route.play .bridge.a .t2{animation:a-t2 4s linear both}
+  .route.play .bridge.b{animation:b-box 4s var(--ease) both}
+  .route.play .bridge.b .t1{animation:b-t1 4s linear both}
+  .route.play .bridge.b .t2{animation:b-t2 4s linear both}
+  @keyframes a-box{0%,40%{border-style:solid;border-color:var(--u-col);background:var(--u-soft);color:var(--ink)}46%,100%{border-style:dashed;border-color:var(--mat-line);background:var(--lab-col);color:var(--mute)}}
+  @keyframes a-t1{0%,40%{opacity:1;color:var(--accent-text)}46%,100%{opacity:0}}
+  @keyframes a-t2{0%,40%{opacity:0}48%,100%{opacity:1}}
+  @keyframes b-box{0%,56%{border-color:var(--mat-line);background:var(--lab-col)}64%,100%{border-color:var(--u-col);background:var(--u-soft)}}
+  @keyframes b-t1{0%,60%{opacity:1}66%,100%{opacity:0}}
+  @keyframes b-t2{0%,70%{opacity:0}80%,100%{opacity:1}}
+}
+
+/* comparison table */
+.scroll{overflow-x:auto}
+.cmp{border-collapse:collapse;width:100%;min-width:880px;text-align:left;font-size:var(--t-sm);line-height:1.35}
+.cmp th,.cmp td{padding:14px clamp(10px,1.4vw,18px);vertical-align:top}
+.cmp thead th{font-size:var(--t-sm);font-weight:700}
+.cmp thead th:first-child{color:var(--mute);background:var(--lab-col)}
+.cmp thead th.us{background:var(--u-head);color:var(--u-ink);font-size:var(--t-lg);font-weight:800;letter-spacing:-0.03em}
+.cmp thead th.them{background:var(--f-head);color:var(--f-ink)}
+.cmp tbody tr+tr>*{border-top:1px solid var(--line)}
+.cmp tbody th{background:var(--lab-col);color:var(--ink);font-weight:700;width:15%}
+.cmp td{background:var(--f-col);color:var(--f-ink);border-top-color:rgba(255,255,255,.1)}
+.cmp tbody tr+tr>td{border-top:1px solid rgba(255,255,255,.1)}
+.cmp td.us{background:var(--u-col);color:var(--u-ink);font-weight:600;border-top-color:rgba(255,255,255,.2)}
+
+/* features */
+.feat{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,64px);align-items:start}
+.feat-head{position:sticky;top:24px}
+.feat-list{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 32px}
+.f{display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid var(--line)}
+.f h3{font-size:var(--t-xl);line-height:1.1;letter-spacing:-0.03em;font-weight:700}
+.f p{color:var(--mute);font-size:var(--t-md);line-height:1.5;text-wrap:pretty}
+.f.lead{grid-column:1/-1;border-top:2px solid var(--ink)}
+.f.lead h3{font-size:clamp(28px,3vw,36px);letter-spacing:-0.04em}
+.f.lead p{color:var(--ink);font-size:var(--t-lg);max-width:44ch}
+
+/* methods */
+.methods{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:12px}
+.pills{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.pill{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:var(--chip);font-size:var(--t-md);font-weight:600}
+.pill.on{background:var(--u-col);color:var(--u-ink)}
+.ask{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;border-radius:var(--r-card);padding:clamp(22px,3vw,32px);background:var(--mat);border:1px solid var(--mat-line)}
+.ask h3{font-size:var(--t-xl);letter-spacing:-0.03em;font-weight:700;margin-bottom:6px}
+.ask p{color:var(--mute);max-width:52ch;font-size:var(--t-md);line-height:1.45}
+
+/* sdks */
+.sdk-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.sdk-list .pill{background:var(--lab-col);border:1px solid var(--mat-line)}
+
+/* close */
+.close{border-radius:var(--r-card);padding:clamp(32px,6vw,64px);background:linear-gradient(160deg,var(--u-col),var(--u-head));color:var(--u-ink);display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.close h2{max-width:20ch;font-size:clamp(32px,4.6vw,56px);letter-spacing:-0.045em}
+.close p{max-width:46ch;font-size:var(--t-lg);line-height:1.45;color:var(--u-mute)}
+footer{padding-block:32px 48px}
+footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;color:var(--mute);font-size:var(--t-sm)}
+footer nav{display:flex;flex-wrap:wrap;gap:20px}
+
+/* entrance and scroll reveal */
+.hero-copy>*,.hero-board{animation:rise .8s var(--ease) both;animation-delay:calc(var(--i,3)*90ms)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .hero-copy>*,.hero-board{animation:none!important}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .btn{transition:none}
+}
+@media (max-width:860px){
+  .hero{grid-template-columns:minmax(0,1fr);min-height:0}
+  .bento,.methods,.feat{grid-template-columns:minmax(0,1fr)}
+  .tile.u{grid-row:auto;min-height:0}
+  .feat-head{position:static}
+  .route{grid-template-columns:minmax(0,1fr)}
+  .r-link{width:2px;height:28px;margin:0 auto}
+}
+@media (max-width:560px){
+  :root{--t-xs:12px;--t-sm:13px;--t-md:15px;--t-lg:18px;--t-xl:20px}
+  .hero h1{font-size:34px}
+  .hero p{font-size:var(--t-md)}
+  .cta .btn{flex:1 1 100%}
+  .feat-list{grid-template-columns:minmax(0,1fr)}
+  .top-actions .btn.ghost{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#top"><img src="flows/unifold-logo.png" alt="">Unifold</a>
+  <div class="top-actions">
+    <a class="btn ghost sm" href="index.html">Unifold vs Fun.xyz</a>
+    <a class="btn primary sm" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="wrap hero" style="padding-top:24px">
+  <div class="hero-copy">
+    <h1 style="--i:0">Better than any other deposit stack.</h1>
+    <p style="--i:1">Reroutes around weak geos and stalled bridges, native on web and mobile, live in ten lines of code.</p>
+    <div class="cta" style="--i:2">
+      <a class="btn primary" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a>
+      <a class="btn ghost" href="#compare">See how it compares</a>
+    </div>
+  </div>
+  <div class="hero-board" style="--i:3">
+    <div class="mat">
+      <div class="board" role="table" aria-label="Unifold compared with a single ramp or bridge">
+        <div class="cols hd" role="row"><div class="lab" role="columnheader">What matters</div><div class="u" role="columnheader">Unifold</div><div class="f" role="columnheader">A single ramp or bridge</div></div>
+        <div class="cols vrow" role="row"><div class="cell lab" role="rowheader">Reliability</div><div class="cell u" role="cell">Reroutes around a weak ramp or a stalled bridge</div><div class="cell f" role="cell">Fails with that one provider</div></div>
+        <div class="cols vrow" role="row"><div class="cell lab" role="rowheader">Geo coverage</div><div class="cell u" role="cell">Add geos by routing, no new integration</div><div class="cell f" role="cell">Strong in some geos, weaker in others</div></div>
+        <div class="cols vrow" role="row"><div class="cell lab" role="rowheader">Mobile</div><div class="cell u" role="cell">Native on iOS, Android, React Native and Flutter</div><div class="cell f" role="cell">Web view or redirect</div></div>
+        <div class="cols vrow" role="row"><div class="cell lab" role="rowheader">Operations</div><div class="cell u" role="cell">Webhooks, treasury, withdrawals, checkout</div><div class="cell f" role="cell">Not included</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap proof reveal"><span>Live across</span><b>Liquid</b><b>Legend.trade</b><b>Courtyard</b></div>
+
+<section class="wrap" id="why">
+  <div class="sec-head reveal">
+    <h2>One ramp. One bridge. One point of failure.</h2>
+    <p class="sub">Most teams wire up a single ramp and a single bridge, then live with the gaps.</p>
+  </div>
+  <div class="bento">
+    <article class="tile u reveal">
+      <h3>Unifold routes around both.</h3>
+      <p>Several ramps and several bridges sit behind one SDK. A weak geo or a stalled bridge reroutes with no code change.</p>
+    </article>
+    <article class="tile sub reveal">
+      <h3>A ramp has strong geos and weak ones.</h3>
+      <p>Want more geographies? Integrate another ramp, and another after that.</p>
+    </article>
+    <article class="tile sub reveal">
+      <h3>A bridge goes down and deposits stick.</h3>
+      <p>With one bridge, an outage becomes your outage, and users wait on funds in flight.</p>
+    </article>
+  </div>
+</section>
+
+<section class="wrap" id="routing">
+  <div class="sec-head reveal">
+    <h2>When a bridge stalls, the deposit takes another.</h2>
+    <p class="sub">The deposit starts in your app, Unifold picks the route, and a stalled bridge is skipped.</p>
+  </div>
+  <div class="mat"><div class="board" style="padding:clamp(16px,3vw,32px)">
+    <div class="route" id="route" role="img" aria-label="Diagram: a deposit goes from your app to Unifold, Bridge A stalls, and the deposit is delivered through Bridge B">
+      <div class="node">Your app<small>Starts the deposit</small></div>
+      <div class="r-link"></div>
+      <div class="node uni">Unifold<small>Chooses the route</small></div>
+      <div class="r-link"></div>
+      <div class="r-bridges">
+        <div class="node bridge a">Bridge A<em class="t1">Trying</em><em class="t2">Stalled</em></div>
+        <div class="node bridge b">Bridge B<em class="t1">Standing by</em><em class="t2">Delivered</em></div>
+        <div class="node bridge c">Bridge C<em class="t1" style="opacity:1">Standing by</em></div>
+      </div>
+    </div>
+  </div></div>
+  <button class="btn ghost replay" id="replay" type="button">Replay</button>
+</section>
+
+<section class="wrap" id="compare">
+  <div class="sec-head reveal">
+    <h2>Row by row, Unifold comes out ahead.</h2>
+    <p class="sub">Other approaches each solve one slice. Unifold covers the whole path natively.</p>
+  </div>
+  <div class="mat reveal"><div class="board scroll">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th scope="col">What matters</th>
+          <th scope="col" class="us">Unifold</th>
+          <th scope="col" class="them">A single ramp</th>
+          <th scope="col" class="them">A single bridge</th>
+          <th scope="col" class="them">Other deposit platforms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Integration</th><td class="us">About ten lines, one SDK</td><td>One integration per ramp</td><td>One integration per bridge</td><td>One SDK, fewer platforms</td></tr>
+        <tr><th scope="row">Geo coverage</th><td class="us">Add geos by routing, no new integration</td><td>Strong in some geos, weaker in others</td><td>Not applicable</td><td>Varies</td></tr>
+        <tr><th scope="row">Reliability</th><td class="us">Reroutes around a weak ramp or a stalled bridge</td><td>Fails with that one provider</td><td>Transactions can stick when it goes down</td><td>Often one routing path</td></tr>
+        <tr><th scope="row">SDK breadth</th><td class="us">React, React Native, Swift, Kotlin, Flutter, Svelte</td><td>Widget or web first</td><td>API only</td><td>Fewer SDKs</td></tr>
+        <tr><th scope="row">Mobile</th><td class="us">Native on iOS, Android, React Native and Flutter</td><td>Web view or redirect</td><td>Not applicable</td><td>Mostly web first</td></tr>
+        <tr><th scope="row">Ramp flow control</th><td class="us">Headless option, you own the interface</td><td>Limited</td><td>Not applicable</td><td>Limited</td></tr>
+        <tr><th scope="row">Payment methods</th><td class="us">Bank deposits and withdrawals, Cash App, Apple Pay, card, wallets, exchanges</td><td>A fixed set per provider</td><td>Crypto only</td><td>Varies</td></tr>
+        <tr><th scope="row">Custom needs</th><td class="us">Tell us what you need and we scope it into the widget</td><td>Whatever the provider offers</td><td>Not applicable</td><td>Varies</td></tr>
+        <tr><th scope="row">Operations</th><td class="us">Webhooks, treasury, withdrawals, checkout</td><td>Not included</td><td>Not included</td><td>Partial</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</section>
+
+<section class="wrap feat">
+  <div class="feat-head reveal"><h2>Everything a deposit needs, native to your app.</h2></div>
+  <div class="feat-list">
+    <div class="f lead reveal"><h3>Any source, any destination</h3><p>Users pay by bank transfer, card, Apple Pay, Cash App, a wallet or an exchange account, in any token on any chain. Funds land where you configure.</p></div>
+    <div class="f reveal"><h3>Failover built in</h3><p>Geo-aware routing across multiple ramps and bridges, so success does not depend on one provider.</p></div>
+    <div class="f reveal"><h3>The most native experience</h3><p>Deposits live inside your UI with no redirects, on web and mobile.</p></div>
+    <div class="f reveal"><h3>Headless ramps</h3><p>Run the ramp flow through your own interface and keep complete control of the experience.</p></div>
+    <div class="f reveal"><h3>Operations included</h3><p>Signed and retried webhooks, testnet mode, geo controls, treasury sweeps and spend policies, plus withdrawals and checkout.</p></div>
+    <div class="f reveal"><h3>Live in days, not quarters</h3><p>One integration replaces a ramp, a bridge and a treasury project. Your team stays on your product.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="methods">
+  <div class="sec-head reveal">
+    <h2>Every way your users want to pay and get paid.</h2>
+    <p class="sub">Bank rails, Cash App, cards, wallets and exchanges, all inside one widget.</p>
+  </div>
+  <div class="methods">
+    <article class="tile u reveal" style="grid-row:auto;min-height:0">
+      <h3>Bank deposits and bank withdrawals</h3>
+      <p>Let users fund their account straight from a bank and cash out back to it. Both directions run through the same integration as everything else.</p>
+    </article>
+    <article class="tile sub reveal">
+      <h3>Cash App support</h3>
+      <p>Users fund with Cash App inside the same deposit modal, with no redirects and no separate integration.</p>
+    </article>
+    <div class="pills reveal">
+      <span class="pill on">Bank deposits</span><span class="pill on">Bank withdrawals</span><span class="pill on">Cash App</span>
+      <span class="pill">Apple Pay</span><span class="pill">Card</span><span class="pill">Wallets</span><span class="pill">Exchange accounts</span>
+    </div>
+    <div class="ask reveal">
+      <div><h3>Need something we do not support yet?</h3><p>Tell us what you are scoping. We will scope it out with you and integrate it into the widget.</p></div>
+      <a class="btn ghost" href="mailto:hello@unifold.io">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="sdks">
+  <div class="mat reveal"><div class="board" style="padding:clamp(22px,3vw,32px)">
+    <h2 style="font-size:var(--t-h2)">More SDKs. More native on mobile.</h2>
+    <p class="sub" style="margin-top:12px">Truly native on iOS and Android, plus React Native and Flutter, so deposits are built into your app and not bolted on.</p>
+    <div class="sdk-list"><span class="pill">React</span><span class="pill">React Native</span><span class="pill">Swift</span><span class="pill">Kotlin</span><span class="pill">Flutter</span><span class="pill">Svelte</span></div>
+  </div></div>
+</section>
+
+<section class="wrap" style="padding-bottom:clamp(48px,8vw,96px)">
+  <div class="close reveal">
+    <h2>Ship deposits this week, not next quarter.</h2>
+    <p>Tell us about your product, volume and geos. We will show you the flow running in your app.</p>
+    <a class="btn white" href="https://demo.unifold.io" target="_blank" rel="noopener">Try the live demo</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Unifold, Inc. Backed by Y Combinator.</div>
+    <nav aria-label="Footer"><a href="https://docs.unifold.io">Docs</a><a href="mailto:hello@unifold.io">hello@unifold.io</a><a href="index.html">Unifold vs Fun.xyz</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var rv = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .15 });
+    [].forEach.call(rv, function (el) { io.observe(el); });
+  } else { [].forEach.call(rv, function (el) { el.classList.add("in"); }); }
+
+  /* The routing demo plays once when scrolled to, and again on Replay. Reduced motion shows the finished state. */
+  var route = document.getElementById("route"), btn = document.getElementById("replay");
+  if (!route || !("IntersectionObserver" in window) || reduce) { document.documentElement.classList.remove("js"); return; }
+  function play() { route.classList.remove("play"); void route.offsetWidth; route.classList.add("play"); }
+  new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { play(); o.disconnect(); } }); }, { threshold: .6 }).observe(route);
+  btn.addEventListener("click", play);
+})();
+</script>
+</body>
+</html>
