@@ -12,6 +12,7 @@
       menu.setAttribute("aria-hidden", open ? "false" : "true");
       if (open) { menu.removeAttribute("inert"); } else { menu.setAttribute("inert", ""); }
       document.body.style.overflow = open ? "hidden" : "";
+      document.documentElement.classList.toggle("menu-open", open);
     }
     setMenu(false);
     toggle.addEventListener("click", function () { setMenu(toggle.getAttribute("aria-expanded") !== "true"); });
@@ -56,4 +57,18 @@
       update();
     }
   }
+})();
+
+/* mobile CTA dock: shown once the hero is behind you, hidden again near the closing CTA and footer */
+(function () {
+  var dock = document.getElementById("dock");
+  if (!dock || !("IntersectionObserver" in window)) return;
+  var hero = document.querySelector(".hero"), seen = { hero: true, close: false, foot: false };
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { seen[e.target.getAttribute("data-dock")] = e.isIntersecting; });
+    dock.classList.toggle("show", !seen.hero && !seen.close && !seen.foot);
+  });
+  [[hero, "hero"], [document.querySelector(".close"), "close"], [document.querySelector("footer"), "foot"]].forEach(function (p) {
+    if (p[0]) { p[0].setAttribute("data-dock", p[1]); io.observe(p[0]); }
+  });
 })();
