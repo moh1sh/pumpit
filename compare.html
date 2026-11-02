@@ -83,12 +83,12 @@
 
 <section class="wrap section" id="compare">
   <div class="sec-head reveal"><h2 class="section-title">Fun.xyz and Unifold, row by row.</h2></div>
-  <div class="mat reveal">
-    <div class="board">
+  <div class="reveal">
+    <div class="cmpx">
       <div class="cols hd title-3">
-        <div class="lab title-4">Feature</div>
-        <div class="f"><img class="logo" src="flows/fun-logo.png" alt="">Fun.xyz</div>
+        <div class="lab"><span class="sr">Feature</span></div>
         <div class="u"><img class="logo" src="flows/unifold-logo.png" alt="">Unifold</div>
+        <div class="f"><img class="logo" src="flows/fun-logo.png" alt="">Fun.xyz</div>
       </div>
       <div id="chart" role="list"></div>
     </div>
@@ -175,7 +175,7 @@
     var b=document.createElement(r.nomedia?"div":"button");
     b.className="row"+(r.nomedia?" static":"");
     if(r.nomedia){b.setAttribute("role","listitem");}else{b.type="button";b.setAttribute("aria-label",r.label+": open flows");}
-    b.innerHTML='<div class="cell lab title-4">'+r.label+'</div><div class="cell f">'+r.f+'</div><div class="cell u">'+r.u+(r.nomedia?'':'<span class="play" aria-hidden="true">'+PLAY+'</span>')+'</div>';
+    b.innerHTML='<div class="cell lab title-4">'+r.label+'</div><div class="cell u">'+r.u+(r.nomedia?'':'<span class="play" aria-hidden="true">'+PLAY+'</span>')+'</div><div class="cell f">'+r.f+'</div>';
     if(!r.nomedia)b.addEventListener("click",function(){b.classList.remove("fired");void b.offsetWidth;b.classList.add("fired");open(i,b)});
     chart.appendChild(b);
   });

@@ -72,3 +72,28 @@
     if (p[0]) { p[0].setAttribute("data-dock", p[1]); io.observe(p[0]); }
   });
 })();
+
+/* what matters: one pill is open at a time, the others fold to a slim strip */
+(function () {
+  var root = document.getElementById("wm");
+  if (!root) return;
+  var cards = [].slice.call(root.querySelectorAll(".wm-card"));
+  function current() { for (var i = 0; i < cards.length; i++) if (cards[i].classList.contains("open")) return i; return 0; }
+  function open(i, focus) {
+    cards.forEach(function (c, k) {
+      var on = k === i, tab = c.querySelector(".wm-tab");
+      c.classList.toggle("open", on);
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.tabIndex = on ? 0 : -1;
+      c.querySelector(".wm-panel").hidden = !on;
+    });
+    if (focus) cards[i].querySelector(".wm-tab").focus();
+  }
+  cards.forEach(function (c, i) { c.addEventListener("click", function () { if (!c.classList.contains("open")) open(i); }); });
+  root.addEventListener("keydown", function (e) {
+    var n = cards.length, i = current(), map = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 };
+    if (!(e.key in map)) return;
+    e.preventDefault(); open(Math.max(0, Math.min(n - 1, map[e.key])), true);
+  });
+  open(0);
+})();

@@ -49,13 +49,37 @@
     <p class="proof caption-1" style="--i:3"><span>Backed by <b>Y Combinator</b></span></p>
   </div>
   <div class="hero-board" style="--i:3">
-    <div class="mat">
-      <div class="board" role="table" aria-label="Unifold compared with a single ramp or bridge">
-        <div class="cols hd title-4" role="row"><div class="lab" role="columnheader">What matters</div><div class="u" role="columnheader">Unifold</div><div class="f" role="columnheader">A single ramp or bridge</div></div>
-        <div class="cols vrow" role="row"><div class="cell lab title-4" role="rowheader">Reliability</div><div class="cell u body-5" role="cell">Reroutes around a weak ramp or a stalled bridge</div><div class="cell f body-6" role="cell">Fails with that one provider</div></div>
-        <div class="cols vrow" role="row"><div class="cell lab title-4" role="rowheader">Geo coverage</div><div class="cell u body-5" role="cell">Add geos by routing, no new integration</div><div class="cell f body-6" role="cell">Strong in some geos, weaker in others</div></div>
-        <div class="cols vrow" role="row"><div class="cell lab title-4" role="rowheader">Mobile</div><div class="cell u body-5" role="cell">Native on iOS, Android, React Native and Flutter</div><div class="cell f body-6" role="cell">Web view or redirect</div></div>
-        <div class="cols vrow" role="row"><div class="cell lab title-4" role="rowheader">Operations</div><div class="cell u body-5" role="cell">Webhooks, treasury, withdrawals, checkout</div><div class="cell f body-6" role="cell">Not included</div></div>
+    <div class="wm" id="wm">
+      <p class="wm-title title-3">What matters</p>
+      <div class="wm-row" role="tablist" aria-label="What matters">
+      <div class="wm-card">
+        <button class="wm-tab" type="button" role="tab" id="wm-t1" aria-controls="wm-p1" aria-selected="false" tabindex="-1"><span class="wm-lbl title-2">Reliability</span></button>
+        <div class="wm-panel" role="tabpanel" id="wm-p1" aria-labelledby="wm-t1" hidden>
+          <div class="wm-us"><span class="caption-3">Unifold</span><p class="body-5">Reroutes around a weak ramp or a stalled bridge</p></div>
+          <div class="wm-them"><span class="caption-3">A single ramp or bridge</span><p class="body-6">Fails with that one provider</p></div>
+        </div>
+      </div>
+      <div class="wm-card">
+        <button class="wm-tab" type="button" role="tab" id="wm-t2" aria-controls="wm-p2" aria-selected="false" tabindex="-1"><span class="wm-lbl title-2">Geo coverage</span></button>
+        <div class="wm-panel" role="tabpanel" id="wm-p2" aria-labelledby="wm-t2" hidden>
+          <div class="wm-us"><span class="caption-3">Unifold</span><p class="body-5">Add geos by routing, no new integration</p></div>
+          <div class="wm-them"><span class="caption-3">A single ramp or bridge</span><p class="body-6">Strong in some geos, weaker in others</p></div>
+        </div>
+      </div>
+      <div class="wm-card">
+        <button class="wm-tab" type="button" role="tab" id="wm-t3" aria-controls="wm-p3" aria-selected="false" tabindex="-1"><span class="wm-lbl title-2">Mobile</span></button>
+        <div class="wm-panel" role="tabpanel" id="wm-p3" aria-labelledby="wm-t3" hidden>
+          <div class="wm-us"><span class="caption-3">Unifold</span><p class="body-5">Native on iOS, Android, React Native and Flutter</p></div>
+          <div class="wm-them"><span class="caption-3">A single ramp or bridge</span><p class="body-6">Web view or redirect</p></div>
+        </div>
+      </div>
+      <div class="wm-card">
+        <button class="wm-tab" type="button" role="tab" id="wm-t4" aria-controls="wm-p4" aria-selected="false" tabindex="-1"><span class="wm-lbl title-2">Operations</span></button>
+        <div class="wm-panel" role="tabpanel" id="wm-p4" aria-labelledby="wm-t4" hidden>
+          <div class="wm-us"><span class="caption-3">Unifold</span><p class="body-5">Webhooks, treasury, withdrawals, checkout</p></div>
+          <div class="wm-them"><span class="caption-3">A single ramp or bridge</span><p class="body-6">Not included</p></div>
+        </div>
+      </div>
       </div>
     </div>
   </div>
