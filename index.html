@@ -68,6 +68,25 @@
   </div>
   <div class="bento">
     <article class="tile hot tall end reveal">
+      <div class="route-art">
+        <svg viewBox="0 0 480 220" role="img" aria-label="Several ramps and bridges routed through Unifold: Bridge A is stalled and skipped, Bridge B delivers">
+          <g class="ra-lines">
+            <path d="M108 42C150 42 150 100 192 100"/><path d="M108 110H192"/><path d="M108 178C150 178 150 120 192 120"/>
+            <path class="cool" d="M288 100C330 100 330 42 372 42"/><path class="hot" d="M288 110H372"/><path class="cool" d="M288 120C330 120 330 178 372 178"/>
+          </g>
+          <g class="ra-x"><circle cx="330" cy="71" r="9"/><path d="M326 67l8 8M334 67l-8 8"/></g>
+          <g class="ra-nodes">
+            <rect x="12" y="24" width="96" height="36" rx="10"/><rect x="12" y="92" width="96" height="36" rx="10"/><rect x="12" y="160" width="96" height="36" rx="10"/>
+            <rect class="uni" x="192" y="84" width="96" height="52" rx="12"/>
+            <rect x="372" y="24" width="96" height="36" rx="10"/><rect class="on" x="372" y="92" width="96" height="36" rx="10"/><rect x="372" y="160" width="96" height="36" rx="10"/>
+          </g>
+          <g class="ra-text">
+            <text x="60" y="47">Ramp A</text><text x="60" y="115">Ramp B</text><text x="60" y="183">Ramp C</text>
+            <text class="u" x="240" y="115">Unifold</text>
+            <text class="dim" x="420" y="47">Bridge A</text><text class="on" x="420" y="115">Bridge B</text><text x="420" y="183">Bridge C</text>
+          </g>
+        </svg>
+      </div>
       <span class="eyebrow u caption-3">With Unifold</span>
       <h3 class="heading-4">Unifold routes around both.</h3>
       <p class="body-3">Several ramps and several bridges sit behind one SDK. A weak geo or a stalled bridge reroutes with no code change.</p>
@@ -88,22 +107,43 @@
 <section class="wrap section" id="routing">
   <div class="sec-head reveal">
     <h2 class="section-title">When a bridge stalls, the deposit takes another.</h2>
-    <p class="lede">The deposit starts in your app, Unifold picks the route, and a stalled bridge is skipped.</p>
+    <p class="lede">Step through a deposit. The moment Bridge A stalls, Unifold routes around it.</p>
   </div>
-  <div class="mat reveal"><div class="board pad">
-    <div class="route" id="route" role="img" aria-label="Diagram: a deposit goes from your app to Unifold, Bridge A stalls, and the deposit is delivered through Bridge B">
-      <div class="node"><span class="title-1">Your app</span><small class="caption-2">Starts the deposit</small></div>
-      <div class="r-link"></div>
-      <div class="node uni"><span class="title-1 nm">Unifold</span><small class="caption-2">Chooses the route</small></div>
-      <div class="r-link"></div>
-      <div class="r-bridges">
-        <div class="node bridge a"><span class="title-3 nm">Bridge A</span><span class="st caption-1 t1">Trying</span><span class="st caption-1 t2">Stalled</span></div>
-        <div class="node bridge b"><span class="title-3 nm">Bridge B</span><span class="st caption-1 t1">Standing by</span><span class="st caption-1 t2">Delivered</span></div>
-        <div class="node bridge c"><span class="title-3 nm">Bridge C</span><span class="st caption-1 t1">Standing by</span></div>
+  <div class="mat reveal"><div class="board pad flow" id="flow">
+    <div class="flow-row" id="flowRow" role="tablist" aria-label="Deposit steps">
+      <div class="flow-item" data-step="1">
+        <div class="flow-top"><button class="flow-tab" type="button" role="tab" aria-label="Deposit" aria-controls="flowPanel" aria-selected="false" tabindex="-1"><span class="in"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span></button><span class="flow-sep" aria-hidden="true"></span></div>
+        <div class="flow-info"><div class="fl"><span class="title-3">Deposit</span><span class="leader"></span><span class="caption-5 val">Step 1</span></div><dl><div class="fl"><dt class="caption-4">Where</dt><dd><span class="leader"></span><span class="caption-5 val">Your app</span></dd></div><div class="fl"><dt class="caption-4">Redirect</dt><dd><span class="leader"></span><span class="caption-5 val">None</span></dd></div></dl></div>
+      </div>
+      <div class="flow-item" data-step="2">
+        <div class="flow-top"><button class="flow-tab" type="button" role="tab" aria-label="Route" aria-controls="flowPanel" aria-selected="false" tabindex="-1"><span class="in"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span></button><span class="flow-sep" aria-hidden="true"></span></div>
+        <div class="flow-info"><div class="fl"><span class="title-3">Route</span><span class="leader"></span><span class="caption-5 val">Step 2</span></div><dl><div class="fl"><dt class="caption-4">Routes</dt><dd><span class="leader"></span><span class="caption-5 val">Several</span></dd></div><div class="fl"><dt class="caption-4">Chosen</dt><dd><span class="leader"></span><span class="caption-5 val">Bridge A</span></dd></div></dl></div>
+      </div>
+      <div class="flow-item" data-step="3">
+        <div class="flow-top"><button class="flow-tab" type="button" role="tab" aria-label="Stalled" aria-controls="flowPanel" aria-selected="false" tabindex="-1"><span class="in"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span></button><span class="flow-sep" aria-hidden="true"></span></div>
+        <div class="flow-info"><div class="fl"><span class="title-3">Stalled</span><span class="leader"></span><span class="caption-5 val">Step 3</span></div><dl><div class="fl"><dt class="caption-4">Bridge</dt><dd><span class="leader"></span><span class="caption-5 val">A</span></dd></div><div class="fl"><dt class="caption-4">Status</dt><dd><span class="leader"></span><span class="bdg off caption-4">Stalled</span></dd></div></dl></div>
+      </div>
+      <div class="flow-item" data-step="4">
+        <div class="flow-top"><button class="flow-tab" type="button" role="tab" aria-label="Reroute" aria-controls="flowPanel" aria-selected="false" tabindex="-1"><span class="in"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span></button><span class="flow-sep" aria-hidden="true"></span></div>
+        <div class="flow-info"><div class="fl"><span class="title-3">Reroute</span><span class="leader"></span><span class="caption-5 val">Step 4</span></div><dl><div class="fl"><dt class="caption-4">Skips</dt><dd><span class="leader"></span><span class="caption-5 val">Bridge A</span></dd></div><div class="fl"><dt class="caption-4">Takes</dt><dd><span class="leader"></span><span class="caption-5 val">Bridge B</span></dd></div></dl></div>
+      </div>
+      <div class="flow-item" data-step="5">
+        <div class="flow-top"><button class="flow-tab" type="button" role="tab" aria-label="Delivered" aria-controls="flowPanel" aria-selected="false" tabindex="-1"><span class="in"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span></button></div>
+        <div class="flow-info"><div class="fl"><span class="title-3">Delivered</span><span class="leader"></span><span class="caption-5 val">Step 5</span></div><dl><div class="fl"><dt class="caption-4">Bridge</dt><dd><span class="leader"></span><span class="caption-5 val">B</span></dd></div><div class="fl"><dt class="caption-4">Status</dt><dd><span class="leader"></span><span class="bdg good caption-4">Delivered</span></dd></div></dl></div>
+      </div>
+    </div>
+    <div class="flow-panel" id="flowPanel" role="tabpanel" aria-live="polite">
+      <div class="flow-text">
+        <p class="flow-sum body-3" data-step="1">A user starts a deposit inside your app, with no redirect.</p><p class="flow-sum body-3" data-step="2" hidden>Unifold picks a route across the ramps and bridges behind one SDK, starting with Bridge A.</p><p class="flow-sum body-3" data-step="3" hidden>Bridge A stalls. With a single bridge, the deposit would stick here and your user would wait.</p><p class="flow-sum body-3" data-step="4" hidden>Unifold skips the stalled bridge and sends the deposit through Bridge B, with no code change.</p><p class="flow-sum body-3" data-step="5" hidden>The deposit lands through Bridge B. Your user never left your app.</p>
+        <p class="flow-sum body-3" data-step="6" hidden>Bridge A stalled, Bridge B delivered, and your user never left your app.</p>
+      </div>
+      <div class="cta flow-ctl">
+        <button class="btn btn-ghost button-sm" id="flowPrev" type="button">Previous</button>
+        <button class="btn btn-ghost button-sm" id="flowNext" type="button">Next</button>
+        <button class="btn btn-ghost button-sm replay" id="replay" type="button">Replay</button>
       </div>
     </div>
   </div></div>
-  <button class="btn btn-ghost button-md replay" id="replay" type="button">Replay</button>
 </section>
 
 <section class="wrap section" id="compare">
@@ -139,13 +179,47 @@
 
 <section class="wrap section" id="benefits">
   <div class="sec-head reveal"><h2 class="section-title">Everything a deposit needs, native to your app.</h2></div>
-  <div class="feat-grid">
-    <article class="tile hot lead reveal"><h3 class="heading-4">Any source, any destination</h3><p class="body-3">Users pay by bank transfer, card, Apple Pay, Cash App, a wallet or an exchange account, in any token on any chain. Funds land where you configure.</p></article>
-    <article class="tile reveal" style="--i:1"><h3 class="heading-5">Failover built in</h3><p class="body-6">Routing by geography across multiple ramps and bridges, so success does not depend on one provider.</p></article>
-    <article class="tile reveal" style="--i:2"><h3 class="heading-5">The most native experience</h3><p class="body-6">Deposits live inside your UI with no redirects, on web and mobile.</p></article>
-    <article class="tile reveal" style="--i:3"><h3 class="heading-5">Headless ramps</h3><p class="body-6">Run the ramp flow through your own interface and keep complete control of the experience.</p></article>
-    <article class="tile reveal"><h3 class="heading-5">Operations included</h3><p class="body-6">Signed and retried webhooks, testnet mode, geo controls, treasury sweeps and spend policies, plus withdrawals and checkout.</p></article>
-    <article class="tile reveal" style="--i:1"><h3 class="heading-5">Live in days, not quarters</h3><p class="body-6">One integration replaces a ramp, a bridge and a treasury project. Your team stays on your product.</p></article>
+  <div class="bx-grid">
+    <article class="bx hot reveal">
+      <div class="viz">
+        <div class="circled" aria-hidden="true">
+          <svg viewBox="0 0 240 110"><ellipse cx="120" cy="56" rx="108" ry="40" transform="rotate(-3 120 56)"/><path d="M52 24C92 8 160 6 214 20"/></svg>
+          <span class="heading-1">10</span>
+        </div>
+        <span class="caption-4 val">lines of code, one SDK</span>
+      </div>
+      <div class="txt"><h3 class="heading-5">Live in days, not quarters</h3><p class="body-6">One integration replaces a ramp, a bridge and a treasury project. Your team stays on your product.</p></div>
+    </article>
+    <article class="bx reveal" style="--i:1">
+      <div class="viz">
+        <div class="mini" aria-hidden="true">
+          <div class="mrow"><span class="body-5">Bridge A</span><span class="bdg caption-4">Stalled</span></div>
+          <div class="mrow on"><span class="body-5">Bridge B</span><span class="bdg good caption-4">Delivered</span></div>
+          <div class="mrow"><span class="body-5">Bridge C</span><span class="caption-5 val">Standing by</span></div>
+        </div>
+      </div>
+      <div class="txt"><h3 class="heading-5">Failover built in</h3><p class="body-6">Routing by geography across multiple ramps and bridges, so success does not depend on one provider.</p></div>
+    </article>
+    <article class="bx reveal" style="--i:2">
+      <div class="viz"><img class="shotc" src="flows/providers-uni.png" alt="Unifold deposit sheet listing card, Apple Pay, Google Pay, Cash App and bank transfer" loading="lazy"></div>
+      <div class="txt"><h3 class="heading-5">The most native experience</h3><p class="body-6">Deposits live inside your UI with no redirects, on web and mobile.</p></div>
+    </article>
+    <article class="bx w reveal">
+      <div class="txt"><h3 class="heading-5">Any source, any destination</h3><p class="body-6">Users pay by bank transfer, card, Apple Pay, Cash App, a wallet or an exchange account, in any token on any chain. Funds land where you configure.</p></div>
+      <div class="viz side" aria-hidden="true">
+        <div class="chips"><span class="chip caption-4">Bank transfer</span><span class="chip caption-4">Card</span><span class="chip caption-4">Apple Pay</span><span class="chip caption-4">Cash App</span><span class="chip caption-4">Wallet</span><span class="chip caption-4">Exchange</span></div>
+      </div>
+    </article>
+    <article class="bx w reveal" style="--i:1">
+      <div class="txt"><h3 class="heading-5">Headless ramps</h3><p class="body-6">Run the ramp flow through your own interface and keep complete control of the experience.</p></div>
+      <div class="viz side end" aria-hidden="true">
+        <div class="win"><div class="dots"><i></i><i></i><i></i></div><div class="win-body"><span class="sk" style="width:55%"></span><span class="sk" style="width:85%"></span><span class="sk" style="width:70%"></span><span class="sk-btn caption-4">Your button</span></div></div>
+      </div>
+    </article>
+    <article class="bx strip reveal">
+      <div class="txt"><h3 class="heading-5">Operations included</h3><p class="body-6">Signed and retried webhooks, testnet mode, geo controls, treasury sweeps and spend policies, plus withdrawals and checkout.</p></div>
+      <div class="chips row" aria-hidden="true"><span class="chip caption-4">Webhooks</span><span class="chip caption-4">Testnet mode</span><span class="chip caption-4">Geo controls</span><span class="chip caption-4">Treasury sweeps</span><span class="chip caption-4">Spend policies</span><span class="chip caption-4">Withdrawals</span><span class="chip caption-4">Checkout</span></div>
+    </article>
   </div>
 </section>
 
@@ -187,7 +261,13 @@
 </section>
 
 <section class="wrap section" id="faq">
-  <div class="sec-head reveal"><h2 class="section-title">Questions teams ask first.</h2></div>
+  <div class="faq-grid">
+  <div class="faq-head reveal">
+    <span class="eyebrow u caption-3">FAQ</span>
+    <h2 class="section-title">Questions teams ask first.</h2>
+    <p class="lede">The things teams ask most often. Still stuck? Tell us what you are scoping and we will walk you through it.</p>
+    <a class="btn btn-ghost button-sm" href="mailto:hello@unifold.io">Talk to us</a>
+  </div>
   <div class="faq reveal">
     <details><summary class="title-2"><span>Do users leave my app to deposit?</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></summary><p class="ans body-3">No. Deposits live inside your UI with no redirects, on web and mobile.</p></details>
     <details><summary class="title-2"><span>What happens when a bridge stalls?</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></summary><p class="ans body-3">Unifold skips it and routes the deposit through another bridge. A weak geo or a stalled bridge reroutes with no code change.</p></details>
@@ -196,6 +276,7 @@
     <details><summary class="title-2"><span>Which payment methods can my users use?</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></summary><p class="ans body-3">Bank deposits and withdrawals, Cash App, Apple Pay, card, wallets and exchange accounts, in any token on any chain.</p></details>
     <details><summary class="title-2"><span>Can I keep full control of the interface?</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></summary><p class="ans body-3">Yes. The headless option runs the ramp flow through your own interface.</p></details>
     <details><summary class="title-2"><span>What if I need something that is not supported yet?</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></summary><p class="ans body-3">Tell us what you are scoping. We will scope it out with you and integrate it into the widget.</p></details>
+  </div>
   </div>
 </section>
 
@@ -223,15 +304,52 @@
 <script src="site.js" defer></script>
 <script>
 (function () {
-  /* The routing demo plays once when scrolled to, and again on Replay. Reduced motion keeps the finished state. */
+  /* Step-through of a stalled bridge: tablist semantics, arrow keys, Previous and Next, one past the last step marks all done.
+     Plays once when scrolled to and on Replay; any manual input stops it. Reduced motion never autoplays. */
+  var root = document.getElementById("flow"); if (!root) return;
+  var row = document.getElementById("flowRow"), items = [].slice.call(row.querySelectorAll(".flow-item"));
+  var prev = document.getElementById("flowPrev"), next = document.getElementById("flowNext"), replay = document.getElementById("replay");
+  var sums = [].slice.call(root.querySelectorAll(".flow-sum")), N = items.length, cur = 1, timer = 0;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var route = document.getElementById("route"), btn = document.getElementById("replay");
-  if (!route || !("IntersectionObserver" in window) || reduce) return;
+  function stop() { window.clearInterval(timer); timer = 0; }
+  function edges() {
+    row.style.setProperty("--fl", row.scrollLeft > 1 ? 1 : 0);
+    row.style.setProperty("--fr", row.scrollLeft + row.clientWidth < row.scrollWidth - 1 ? 1 : 0);
+  }
+  function bring(el) {
+    var r = row.getBoundingClientRect(), i = el.getBoundingClientRect();
+    if (i.left < r.left || i.right > r.right) row.scrollTo({ left: row.scrollLeft + (i.left - r.left) - 8, behavior: reduce ? "auto" : "smooth" });
+  }
+  function render() {
+    var all = cur > N;
+    items.forEach(function (it, k) {
+      var s = k + 1, tab = it.querySelector(".flow-tab");
+      it.classList.toggle("done", all || s < cur);
+      it.classList.toggle("active", !all && s === cur);
+      it.classList.toggle("link", all || s + 1 < cur);
+      tab.setAttribute("aria-selected", !all && s === cur ? "true" : "false");
+      tab.tabIndex = (!all && s === cur) || (all && s === N) ? 0 : -1;
+    });
+    sums.forEach(function (p) { p.hidden = +p.getAttribute("data-step") !== cur; });
+    prev.disabled = cur === 1; next.disabled = all;
+    if (!all) bring(items[cur - 1]);
+  }
+  function go(s, focusTab) { cur = Math.max(1, Math.min(N + 1, s)); render(); if (focusTab && cur <= N) items[cur - 1].querySelector(".flow-tab").focus(); }
+  var touched = false;
+  function manual(s, focusTab) { touched = true; stop(); go(s, focusTab); }
+  function play() { stop(); go(1); timer = window.setInterval(function () { if (cur > N) return stop(); go(cur + 1); }, 1700); }
+  items.forEach(function (it, k) { it.querySelector(".flow-tab").addEventListener("click", function () { manual(k + 1); }); });
+  row.addEventListener("keydown", function (e) {
+    var map = { ArrowRight: Math.min(cur, N) + 1, ArrowLeft: Math.min(cur, N) - 1, Home: 1, End: N };
+    if (!(e.key in map)) return; e.preventDefault(); manual(Math.max(1, Math.min(N, map[e.key])), true);
+  });
+  prev.addEventListener("click", function () { manual(cur - 1); if (cur === 1) next.focus(); });
+  next.addEventListener("click", function () { manual(cur + 1); if (cur > N) prev.focus(); });
+  replay.addEventListener("click", function () { if (reduce) go(1); else play(); });
+  row.addEventListener("scroll", edges, { passive: true }); window.addEventListener("resize", edges);
   document.documentElement.classList.add("ready-js");
-  route.classList.add("ready");
-  function play() { route.classList.remove("run"); void route.offsetWidth; route.classList.add("run"); }
-  new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { play(); o.disconnect(); } }); }, { threshold: .6 }).observe(route);
-  btn.addEventListener("click", play);
+  render(); edges();
+  if (!reduce && "IntersectionObserver" in window) new IntersectionObserver(function (es, o) { es.forEach(function (e) { if (e.isIntersecting) { if (!touched) play(); o.disconnect(); } }); }, { threshold: .6 }).observe(root);
 })();
 </script>
 </body>
