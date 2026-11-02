@@ -73,27 +73,38 @@
   });
 })();
 
-/* what matters: one pill is open at a time, the others fold to a slim strip */
+/* what matters: a fanned carousel. Cards sit at an offset from the active one and only move with transform and opacity. */
 (function () {
   var root = document.getElementById("wm");
   if (!root) return;
-  var cards = [].slice.call(root.querySelectorAll(".wm-card"));
-  function current() { for (var i = 0; i < cards.length; i++) if (cards[i].classList.contains("open")) return i; return 0; }
-  function open(i, focus) {
-    cards.forEach(function (c, k) {
-      var on = k === i, tab = c.querySelector(".wm-tab");
-      c.classList.toggle("open", on);
-      tab.setAttribute("aria-selected", on ? "true" : "false");
-      tab.tabIndex = on ? 0 : -1;
-      c.querySelector(".wm-panel").hidden = !on;
+  var cards = [].slice.call(root.querySelectorAll(".car-card")), dots = [].slice.call(root.querySelectorAll(".car-dot"));
+  var num = document.getElementById("carNum"), n = cards.length, cur = 0;
+  function render() {
+    cards.forEach(function (c, i) {
+      var d = i - cur;
+      if (d > n / 2) d -= n; else if (d < -n / 2) d += n;
+      if (d === -n / 2) d = n / 2;
+      c.setAttribute("data-d", d);
+      c.setAttribute("aria-hidden", d === 0 ? "false" : "true");
     });
-    if (focus) cards[i].querySelector(".wm-tab").focus();
+    dots.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-current", i === cur ? "true" : "false"); });
+    num.textContent = cards[cur].querySelector(".car-tag").textContent;
   }
-  cards.forEach(function (c, i) { c.addEventListener("click", function () { if (!c.classList.contains("open")) open(i); }); });
+  function go(i) { cur = (i + n) % n; render(); }
+  document.getElementById("carPrev").addEventListener("click", function () { go(cur - 1); });
+  document.getElementById("carNext").addEventListener("click", function () { go(cur + 1); });
+  dots.forEach(function (b, i) { b.addEventListener("click", function () { go(i); }); });
+  cards.forEach(function (c, i) { c.addEventListener("click", function () { if (i !== cur) go(i); }); });
   root.addEventListener("keydown", function (e) {
-    var n = cards.length, i = current(), map = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 };
-    if (!(e.key in map)) return;
-    e.preventDefault(); open(Math.max(0, Math.min(n - 1, map[e.key])), true);
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); }
   });
-  open(0);
+  var x0 = null, stage = document.getElementById("carStage");
+  stage.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+  window.addEventListener("pointerup", function (e) {
+    if (x0 === null) return;
+    var dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+  });
+  render();
 })();
