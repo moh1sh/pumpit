@@ -319,30 +319,42 @@ p{text-wrap:pretty}
 .btn:disabled:hover{background:transparent;border-color:var(--line)}
 
 .scroll{overflow-x:auto}
-.cmp{border-collapse:collapse;width:100%;min-width:880px;text-align:left}
-.cmp th,.cmp td{padding:var(--s-200);vertical-align:top}
-.cmp thead th{font-size:14px;line-height:20px;font-weight:500;background:var(--c1);color:var(--cink)}
-.cmp thead th:first-child{background:var(--bg);color:var(--mute)}
-.cmp thead th.us{background:var(--s3);color:var(--accent)}
-.cmp tbody th{width:15%;background:var(--bg);color:var(--ink);font-size:14px;line-height:20px;font-weight:500}
+/* comparison: Unifold's column is filled and rises above the table, the alternatives stay quiet and cool */
+.cmp{border-collapse:separate;border-spacing:0;width:100%;min-width:880px;text-align:left}
+.cmp th,.cmp td{padding:var(--s-200) var(--s-300);vertical-align:middle}
+.cmp thead th{padding:var(--s-300) var(--s-200) var(--s-200);background:transparent;color:var(--ink);font-size:16px;line-height:24px;font-weight:600;text-align:center}
+.cmp thead th:first-child{width:22%}
+.cmp thead th.us{padding-top:var(--s-500);background:var(--accent);color:var(--bg);border-radius:var(--r-2xl) var(--r-2xl) 0 0}
+.cmp .nm{display:inline-flex;align-items:center;gap:var(--s-75)}
+.cmp .nm img{width:24px;height:24px;border-radius:var(--r-lg);display:block}
+.cmp tbody th{width:22%;text-align:left;background:var(--s1);color:var(--ink);font-size:14px;line-height:20px;font-weight:500}
 .cmp td{background:var(--c1);color:var(--cink);font-size:14px;line-height:20px;font-weight:400}
-.cmp td.us{background:var(--s3);color:var(--ink);font-weight:500;box-shadow:inset 1px 0 var(--accent-line),inset -1px 0 var(--accent-line)}
-.cmp tbody tr>*{border-top:1px solid var(--line-soft)}
-.cmp tbody tr:first-child>*{border-top:0}
-/* phones: each row becomes a card, Unifold first and warm, the alternatives listed cool underneath */
+.cmp td.us{background:var(--accent);color:var(--bg);font-weight:500}
+.cmp tbody tr>*{border-bottom:1px solid var(--line-soft)}
+.cmp tbody tr:first-child>*{border-top:1px solid var(--line-soft)}
+.cmp tbody tr>*:first-child{border-left:1px solid var(--line-soft)}
+.cmp tbody tr>*:last-child{border-right:1px solid var(--line-soft)}
+.cmp tbody tr:first-child>td.us{border-top:0}
+.cmp tbody tr>td.us{border-bottom-color:rgba(12,11,9,.16)}
+.cmp tbody tr:last-child>td.us{border-bottom:0}
+.cmp tbody tr:first-child>th{border-top-left-radius:var(--r-3xl)}
+.cmp tbody tr:first-child>td:last-child{border-top-right-radius:var(--r-3xl)}
+.cmp tbody tr:last-child>th{border-bottom-left-radius:var(--r-3xl)}
+.cmp tbody tr:last-child>td:last-child{border-bottom-right-radius:var(--r-3xl)}
+/* phones: each row becomes a card, Unifold first and filled, the alternatives listed cool underneath */
 @media (max-width:767px){
   .scroll{overflow:visible}
   .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;min-width:0;width:auto}
   .cmp thead{display:none}
+  .cmp{border:1px solid var(--line-soft);border-radius:var(--r-2xl);overflow:hidden}
   .cmp tbody tr{border-top:1px solid var(--line-soft)}
   .cmp tbody tr:first-child{border-top:0}
-  .cmp tbody tr>*{border-top:0}
-  .cmp tbody th{width:auto;padding:var(--s-200) var(--s-200) var(--s-75)}
+  .cmp tbody tr>*{border:0!important;border-radius:0!important}
+  .cmp tbody th{width:auto;padding:var(--s-200) var(--s-200) var(--s-75);background:var(--bg)}
   .cmp td{padding:var(--s-100) var(--s-200)}
-  .cmp td.us{box-shadow:none;border-block:1px solid var(--accent-line)}
   .cmp td:not(.us){display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:var(--s-100)}
   .cmp td::before{content:attr(data-label);color:var(--cmute);font-weight:500}
-  .cmp td.us::before{display:block;color:var(--accent);margin-bottom:var(--s-25)}
+  .cmp td.us::before{display:block;color:rgba(12,11,9,.65);margin-bottom:var(--s-25)}
   .cmp td:last-child{padding-bottom:var(--s-200)}
 }
 
