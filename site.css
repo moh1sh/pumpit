@@ -84,19 +84,21 @@ p{text-wrap:pretty}
 
 /* ---------- layout ---------- */
 .wrap{width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--s-300)}
-:root{--sec:var(--s-800)}
-.section{padding-top:var(--sec)}
-.section.last{padding-bottom:var(--s-700)}
+:root{--sec:var(--s-400)}
+/* one rhythm: a hairline marks each section edge with equal space either side, so the gap reads as a boundary and not as dead space */
+.section,.tagline{position:relative;margin-top:var(--sec);padding-top:var(--sec)}
+.section::before,.tagline::before{content:"";position:absolute;top:0;left:var(--s-300);right:var(--s-300);height:1px;background:var(--line-soft)}
+.section.last{padding-bottom:var(--s-600)}
 .sec-head{display:flex;flex-direction:column;gap:var(--s-100);max-width:680px;margin-bottom:var(--s-500)}
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:var(--s-600);align-items:center;padding-top:var(--s-900)}
 .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-300)}
 .cta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-100)}
 .proof{display:flex;flex-wrap:wrap;gap:var(--s-50) var(--s-300);color:var(--mute)}
 .proof b{color:var(--ink);font-weight:500}
-@media (max-width:1023px){.hero{padding-top:var(--s-800)}:root{--sec:var(--s-700)}.hero{gap:var(--s-500)}}
+@media (max-width:1023px){.hero{padding-top:var(--s-800)}.hero{gap:var(--s-500)}}
 @media (min-width:861px){.hero.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:767px){:root{--sec:var(--s-700)}.hero{padding-top:var(--s-800)}.sec-head{margin-bottom:var(--s-500)}}
+@media (max-width:767px){:root{--sec:var(--s-300)}.hero{padding-top:var(--s-800)}.sec-head{margin-bottom:var(--s-400)}}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-75);padding:var(--s-75) var(--s-100);border-radius:var(--r-lg);border:1px solid transparent;text-decoration:none;white-space:nowrap;cursor:pointer;
@@ -162,6 +164,8 @@ p{text-wrap:pretty}
 .eyebrow.f{color:var(--cmute)}
 .bento{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:var(--s-200)}
 .bento .tall{grid-row:span 2}
+/* when a side tile is stretched to match the tall one, the copy anchors to the bottom instead of leaving a blank slab */
+.bento .tile:not(.tall)>h3+*{margin-top:auto}
 .bento .tall.end{justify-content:flex-end;min-height:240px}
 @media (max-width:860px){.bento{grid-template-columns:minmax(0,1fr)}.bento .tall{grid-row:auto}}
 
@@ -249,7 +253,6 @@ p{text-wrap:pretty}
 @media (max-width:860px){.phone{height:auto;width:280px}}
 
 /* ---------- tagline reveal ---------- */
-.tagline{padding-block:var(--sec) 0}
 .tagline p{max-width:680px}
 .js .tagline .w{opacity:.3;transition:opacity 500ms var(--ease)}
 .js .tagline .w.on{opacity:1}
@@ -259,7 +262,7 @@ p{text-wrap:pretty}
 .vs div{display:flex;flex-direction:column;gap:var(--s-75)}
 .vs .big{color:var(--accent)}
 .vs .off .big{color:var(--cmute)}
-.shot{display:block;width:100%;height:320px;object-fit:cover;object-position:top;border-radius:var(--r-lg);margin-top:var(--s-100)}
+.shot{display:block;width:100%;height:240px;object-fit:cover;object-position:top;border-radius:var(--r-lg);margin-top:var(--s-100)}
 
 /* ---------- unifold page pieces ---------- */
 .route{display:grid;grid-template-columns:1fr 64px 1fr 64px 1.25fr;align-items:center}
